@@ -1,0 +1,245 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <unistd.h>
+#include<algorithm>
+#define MAX_LENGTH  999
+#define MAX_LINE_LENGTH  100
+
+//debug enum
+enum DEBUG { NONE = 0, ALL};
+static DEBUG dbg = NONE;
+
+// struct node {
+// int data;
+// node* next;
+//};
+
+//new node n
+// node* n;
+//temporary node t
+// node* t;
+// head node h
+// node* h;
+
+//make a new node to store data in
+//n = new node;
+// put 1 in the node
+//n->data = 1;
+//assign both pointers to point at this node
+//head will stay pointing at this node to indicate the first
+//t will follow n  around
+//t = n;
+//h=n;
+//n = new node;
+//n->data = 2;
+//make t point at next and make it equal to n(making the link)
+//t->next = n;
+//advance t 
+//t = t->next;
+//n->next = NULL;
+
+// CREATE CLASS
+class NL {
+
+private:
+  //intiliaze char array for data
+  //length of file in lines
+  int length;
+  char* array[MAX_LENGTH];
+public:
+  //Constructor
+  NL();
+   //destructor
+  ~NL();
+
+   //intialize functions
+   void read (FILE*);
+   void sort(void);
+   void print(void);
+
+};
+
+//define funcitons inside class
+
+// Constructor, runs first when instantiating a class
+NL::NL ()
+{
+  if(dbg == ALL)
+    {
+      printf("NL::constructor\n");
+    }
+  length = -1;
+}
+
+//read file
+//store in an array of strings
+void  NL::read(FILE* fp)
+{
+  if(dbg ==ALL)
+    {
+      printf("NL::read\n");
+    }
+  //find number of lines in file
+  int lines= 0;
+
+  //grab a character from pointer
+  char ch = fgetc(fp);
+
+  //check if at end of file
+  while(ch != EOF)
+    {
+      //if the characther is a new line char increment lines
+      if(ch == '\n')
+  	{
+  	  lines++;
+  	}
+      //grab next characther
+       ch = getc(fp);
+    }
+
+  //reset file pointer to point at begining of file
+  fseek(fp, 0, SEEK_SET);
+
+  //set length in class to amount of lines in file
+  length = lines;
+  //loop over file and grab lines as strings
+  for( int j = 0; j<length; j++)
+    {
+      //declare array to hold each line
+      char line[MAX_LINE_LENGTH];
+
+      //grab each line with fgets with \n
+       fgets(line, MAX_LINE_LENGTH, fp);
+
+      //strip new line char
+      size_t ln = strlen(line -1);
+      if (line[ln] == '\n')
+	{
+	  line[ln] = '\0';
+	}
+      
+      //make some space in array[i] of length of line
+      //the +1 is for \0 (string terminator) I dont think strlen counts it
+      array[j]= new char[strlen(line)];//strlen(line+1)
+
+      //copy line to array[i]
+      strcpy(array[j],line);
+    }
+}
+
+//probably don't want to return string, 
+// I should probably make another private string
+// a "sorted" string
+void NL::sort(void)
+{
+  if (dbg == ALL)
+    {
+       printf("NL::sort\n");
+    }
+  char temp[MAX_LINE_LENGTH];
+  for (int k = 1; k<length; k++){
+      for(int n = 1; n<length; n++){
+	if(strcmp(array[n-1], array[n])>0){
+	  strcpy(temp,array[n-1]);
+	  strcpy(array[n-1],array[n]);
+	  strcpy(array[n], temp);
+	}
+      }
+  }
+}
+
+void NL::print(void)
+{
+  if(dbg == ALL)
+    {
+      printf("NL::print\n");
+    }
+  for ( int i = 0 ; i < length; i++){
+    printf("%03d: %s",i, array[i]);
+   }
+}
+
+//destructor : function tells class how to clean up memory
+NL::~NL ()
+{
+  if (dbg == ALL)
+    {
+      printf("NL::Destructor\n");
+    }
+  //delete array;
+
+}
+int main (int argc, char** argv){
+
+
+  //flags for command line parsing
+  int hflag =0;
+  int dflag =0;
+  int sflag =0;
+  int c;
+  opterr = 0;
+  //set appropriate flags to 1
+  while ((c = getopt (argc, argv, "hds")) != -1 )
+    switch (c)
+      {
+      case 'h':
+	hflag =1;
+	break;
+      case 'd':
+	dflag =1;
+	break;
+      case 's':
+        sflag =1;
+	break;
+      }
+  //help file -h
+  if(hflag == 1)
+  {
+    printf("help file:\n");
+    printf("hw_07 prints file to standard out\n");
+    printf("-s option sorts output in alphabetical order\n");
+    printf("-h displays help file\n");
+    printf("-d adds debug status as the program is running\n");
+    return(-1);
+  }
+
+  //grab file to print and sort
+  char* fname = argv[optind];
+  //fprintf(stdout, "fname = %s\n" , fname);
+
+  //open file
+  FILE *fp = fopen(fname,"r");
+
+  //check if file is valid
+  if (fp == NULL) 
+    {
+      printf("error: couldn't open file\n");
+      return (-1);
+    }
+
+
+
+  if(dflag == 1)
+    {
+              dbg = ALL;
+  }
+ 
+ //instiantate class object
+  NL name_list;  
+  
+ //read file
+  name_list.read(fp);
+
+  //sort if -s flag is thrown
+  if(sflag ==1){
+    name_list.sort();
+   }
+
+ //print file to stdout
+  name_list.print();
+
+  //close file
+  fclose(fp);
+}

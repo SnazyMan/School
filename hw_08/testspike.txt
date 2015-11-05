@@ -1,0 +1,3 @@
+/usr/home/o/434/tue62960/testdata/spike.txt
+/usr/home/o/434/tue62960/testdata/spike1.txt
+/usr/home/o/434/tue62960/testdata/spike2.txt

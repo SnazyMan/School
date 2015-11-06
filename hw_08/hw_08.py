@@ -4,7 +4,7 @@ import re
 import collections
 import operator
 import math
-
+import time
 #define function to find a word in file
 #fname --- file path
 #word is string that you are searching for
@@ -45,6 +45,7 @@ def normalise_dict(d):
 
 def main(argv):
     
+    #print(time.strftime("%H:%M:%S"))
     #input file will have all txt files in database
     #entered as a command line argument
     #grab  file
@@ -83,7 +84,6 @@ def main(argv):
     
     #loop over list containg path names for files with spike
     #
-    print("hist..")
     for i in spike_file:
         
         #grab path name
@@ -93,18 +93,21 @@ def main(argv):
         #one word hist
         #
         with open(i_line, 'r') as spike_path:
-            c = c + collections.Counter(spike_path.read().split())
-
-         #two word hist
-         #
+            data = spike_path.read().lower()
+            data_noPunc = re.sub(ur"[^\w\d'\s]+",'', data)
+            #print(data_noPunc)
+            c = c + collections.Counter(data_noPunc.split())
+        #two word hist
+        #
         with open(i_line, 'r') as spike_path2:
-            j =  spike_path2.read()
-            j = j.split()
-            print(spike_path2)
-            print(j)
-            c2 = c2 + collections.Counter(" ".join(j[i:i+2]) for i in range(0, len(j),2))
-            c2 = c2 + collections.Counter(" ".join(j[i+1:i+3]) for i in range(0,len(j),2))
-    print("removing one word entries...")
+            j =  spike_path2.read().lower()
+            j_noPunc = re.sub(ur"[^\w\d'\s]+",'', j)            
+            j_noPunc = j_noPunc.split()
+            #print(spike_path2)
+            #print(j)
+            c2 = c2 + collections.Counter(" ".join(j_noPunc[i:i+2]) for i in range(0, len(j),2))
+            c2 = c2 + collections.Counter(" ".join(j_noPunc[i+1:i+3]) for i in range(0,len(j),2))
+    
     #remove all one word entires
     #
     c2Dict = dict(c2)
@@ -120,9 +123,10 @@ def main(argv):
     sorted_cDict = sorted(cDict.items(), key=operator.itemgetter(1),reverse=True)
     sorted_twoWord = sorted(twoWord.items(), key=operator.itemgetter(1),reverse=True)
     print(sorted_cDict)
-    print(sorted_twoWord)
-    print("%d files contained the word spike" % file_count)
-    print("a total of %d words in %d files: the average nubber of words per file is %f" %(total,file_count,total/file_count))
+    #print(sorted_twoWord)
+    #print("%d files contained the word spike" % file_count)
+    #print("a total of %d words in %d files: the average nubber of words per file is %f" %(total,file_count,total/file_count))
+    #print(time.strftime("%H:%M:%S"))
 
 if __name__ == "__main__":
     main(sys.argv[0:])

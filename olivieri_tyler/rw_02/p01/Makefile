@@ -15,10 +15,10 @@ foo: foo.o foo_00.o
 #
 foo.o: foo.cc lamp_class.h
 	#compile foo.cc into .o with optimization level 2
-	g++ -O2 -c foo.cc -o foo.o
+	g++ -O2 -pedantic -std=c++98 -c foo.cc -o foo.o
 foo_00.o: foo_00.cc lamp_class.h
 	#compile foo_00.cc into .o with optimization level 2	
-	g++ -O2 -c foo_00.cc -o foo_00.o
+	g++ -O2 -pedantic -std=c++98 -c foo_00.cc -o foo_00.o
 
 # define a target to clean the directory
 #

@@ -1,30 +1,73 @@
+/*
+  //function foo_00.cc
+  //intilizing class methods
+  //Constructor-- intializes private data in class
+  //Destructor -- cleans up memory, deletes any memory allocated by new
+  //set_model -- sets model from command line input from pointer passed to from fun method
+  //set_model will allocate memory for the private var model and the contents of the memory car[1]
+*/
+
 #include "foo.h"
 #include<strings.h>
 #include<string.h>
+
+//Constructor
+//
 Car::Car(float speed_a) {
   //intialize variables
   //
   speed = speed_a;
   model = (char*)NULL;
   brand = (char*)NULL;
-
+  dest = (char*)NULL;
 }
 
+//Destructor
+//
 Car::~Car() {
   //delete model, brand, and dest to clear up memory
+  //check if pointers are NULL first
+  //set pointer back to NULL after memory freeing
   //
-  delete [] model;
-  delete [] brand;
-  delete [] dest;
+  if (model != (char*NULL){
+      delete [] model;
+      model = (char*)NULL;
+    }
+  if (brand != (char*NULL){
+      delete [] brand;
+      brand = (char*)NULL;
+    }
+
+  if (dest != (char*NULL){
+      delete [] dest;
+      dest = (char*)NULL;
+    }
 }
 
+//set_model
+//
 bool Car::set_model(char* model_a) {
+  
   //set the private data model to incoming string
+  //first check to see if model is being overwritten
   //
-  model = model_a;
+  if (model != (char*)NULL) {
+    delete [] model;
+      }
+  
+  //allocate memory for the length of the incoming string plus null char
+  //
+  model  = new char[strlen(speed_a) + 1]
+  
+  //move contents of memory from the location in memory model_a (function argument)
+  //points to, to the location model is pointing too
+  //
+  strcpy(model,model_a)
   return true;
 }
 
+//debug
+//
 bool Car::debug() {
   //print out hello world and the model
   //
@@ -32,7 +75,10 @@ bool Car::debug() {
   return true;
 }
 
+//fun
 // implement a function
+// declares car object pointer and allocates memory space where the pointer is pointing
+//pass command line string to set_model
 //
 bool Car::fun(Car** car_a, char* str) {
   
@@ -40,23 +86,8 @@ bool Car::fun(Car** car_a, char* str) {
   //
   car_a[1] = new Car;
   
-  //find length of source string
+  //pass pointer(string from command line) to car_a[1] to set_model function
   //
-  int length;
-  length = strlen(str);
-  
-  //allocate memory for destination string
-  //
-  dest = new char[length+1]; 
-  
-  //copy string from original memory location
-  //to destination memory location
-  //
-  memcpy(dest,str,length+1);
-  
-  //pass values 
-  //(*car[1]).set_model(dest)
-  //
-  car_a[1]->set_model(dest);
+  car_a[1]->set_model(str);
   return true;
 }

@@ -1,6 +1,12 @@
+/* foo_00.cc
+// method initializing 
+//  
+*/
+
 #include <string.h>
 #include<stdio.h>
 #include "lamp_class.h"
+
 //Constructor
 //
 Lamp::Lamp()
@@ -15,16 +21,41 @@ Lamp::Lamp()
   state = OFF;
 }
 
+//initialize statics
+//
+float Lamp::ac_power = 60.0;
+
 //set_brand
+//
 bool Lamp::set_brand(char* arg)
 {
-  //set private char pointer or array to function argument
+  //find length of incoming string
   //
-  brand = arg;
+  int length;
+  length = strlen(arg);
+ 
+  //make sure not to overwrite brand
+  //if brand is pointing somewhere in memory
+  //free memory where brand is pointing to 
+  //so that the pointer isn't overwritten
+  //
+  if (brand != (char*)NULL) {
+    delete [] brand;
+  }
+  
+  //allocate memory for the incoming string
+  //
+  brand = new char[length+1];
+  
+  //copy to location where memory is allocated
+  //strcpy copies memory contents not just pointer
+  //
+  strcpy(brand,arg);
   return true;
 }
 
 //prints out all interal variables
+//
 bool Lamp::debug(FILE* fp)
 {
   fprintf(fp,"length = %d\n height = %d\n width = %d\n watts= %d\n",length,height,width,watts);
@@ -38,5 +69,8 @@ bool Lamp::debug(FILE* fp)
 //
 Lamp::~Lamp()
 {
-  delete [] brand;
+  if (brand != (char*)NULL) {
+    delete [] brand;
+    brand = (char*)NULL;
+  }
 }

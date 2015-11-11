@@ -12,6 +12,7 @@ protected:
   float speed;
   char* model;
   char* brand;
+  char* dest;
   // public
   //
 public:

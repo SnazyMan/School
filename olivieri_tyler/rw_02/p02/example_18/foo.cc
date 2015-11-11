@@ -1,3 +1,9 @@
+/*
+  //foo.cc
+  //main program 
+  //parses commmand line for var brand
+*/
+
 #include "foo.h"
 #include<string.h>
 #include<strings.h>
@@ -28,7 +34,7 @@ int main (int argc, char** argv) {
   
   //delete source that contains arv[1]
   //
-   delete tstr;
+  delete [] tstr;
 
   // display debug information
   //(*car[1]).debug

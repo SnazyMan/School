@@ -64,21 +64,21 @@ def col2Lol(fname, delim):
     #
     return twoBy2
 
-import sys
+#import sys
 
 #main for testing
 
-def main(argv):
+#def main(argv):
     
-    fname = argv[1]
-    delim = "|"
-    listoflists = col2Lol(fname, delim)
+    #fname = argv[1]
+    #delim = "|"
+    #listoflists = col2Lol(fname, delim)
     
-    print(listoflists)
+    #print(listoflists)
     
 
     
 #end gracefully
 #
-if __name__ == "__main__":
-    main(sys.argv[0:])
+#if __name__ == "__main__":
+    #main(sys.argv[0:])

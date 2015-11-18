@@ -192,26 +192,31 @@ def loltoDict(lists):
 #main
 #
 def main(argv):
-    
-    #grab file name
+
+    #get argc
     #
-    fname = argv[1]
+    argc = len(argv)
     
     #declare delimitor
-    #
+    #     
     delim = "|"
     
-    #grab text file contents into list of lists
+    #loop over command line files
     #
-    listoflists = col2Lol(fname, delim)
+    for z in range(1,argc):
+        
+        #grab file name
+        #
+        fname = argv[z]
     
-    #convert list of lists into dictionary
-    #
-    loltoDict(listoflists)
+        #grab text file contents into list of lists
+        #
+        listoflists = col2Lol(fname, delim)
     
-    #print(listoflists)
-
-
+        #convert list of lists into dictionary
+        #
+        loltoDict(listoflists)
+    
 
 #end gracefully
 #

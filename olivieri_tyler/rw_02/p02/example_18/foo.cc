@@ -13,9 +13,11 @@ int main (int argc, char** argv) {
   //instantiate a class tcar
   //
   Car tcar;
+  
   //make an array of struct pointers of type car 
   //
   Car** cars = new Car*[10];
+  
   //create source array of 100 character pointers or an array 
   //
   char* tstr = new char[100];
@@ -40,5 +42,9 @@ int main (int argc, char** argv) {
   //(*car[1]).debug
   //
   cars[1]->debug();
+
+  //clean up memory
+  //
+  delete [] cars;
 }
 

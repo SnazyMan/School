@@ -1,0 +1,224 @@
+#!/usr/bin/env python
+
+import sys
+import operator
+import math
+
+
+##
+  #function col2LoL.py
+  #takes input of fname, which contains columns in txt file
+  #takes delimeter char that seperates the column in file
+  #recreates table in a list of lists
+  #removes first column (header)
+  #col2LoL will return a list of lists (2x2 array)
+##
+
+def col2Lol(fname, delim):
+
+    #open file
+    #this opening and iteration is to find number of columns
+    #to correctly create list of list size
+    #
+    with open(fname, "r") as fp:
+
+        #read a line
+        #
+        line = fp.readline()
+
+        #split the line by delim into columns
+        #
+        line = line.split(delim)
+
+        #find number of columns in file
+        #
+        colAmt = len(line)
+
+    #delcare list of lists
+    #
+    twoBy2 = [[]for x in xrange(colAmt)]
+
+    #open file
+    #fill list of lists with file contents
+    #
+    with open(fname, "r") as fp:
+
+        #loop over file
+        #
+        for line in fp:
+
+            #split line by delimeter
+            #
+            splitLine = line.split(delim)
+
+            #fill list of lists by appending each column in line to
+            #appropriate list column
+            #loop over line
+            #
+            for i in range(colAmt):
+
+                #append each string to each list creating the same columns as in txt file
+                #
+                twoBy2[i].append(splitLine[i])
+
+    #delcare list of lists
+    #
+    twoBy2 = [[]for x in xrange(colAmt)]
+
+    #open file
+    #fill list of lists with file contents
+    #
+    with open(fname, "r") as fp:
+
+        #loop over file
+        #
+        for line in fp:
+
+            #split line by delimeter
+            #
+            splitLine = line.split(delim)
+
+            #fill list of lists by appending each column in line to
+            #appropriate list column
+            #loop over line
+            #
+            for i in range(colAmt):
+
+                #append each string to each list creating the same columns as in txt file
+                #
+                twoBy2[i].append(splitLine[i])
+
+    #remove the first entry in every list
+    #
+    for j in range(colAmt):
+        twoBy2[j].pop(0)
+    
+    #return the list
+    #
+    return twoBy2
+
+##
+  #function normalise_dict
+  #input d--- dictionary
+  #output is same dictionary with values normalized to the sum of values
+##
+
+def normalise_dict(d):
+    #find sum
+    #
+    factor=1.0/math.fsum(d.itervalues())
+    
+    #loop over all keys in dict
+    #multiply by factor
+    #
+    for k in d:
+        d[k] = d[k]*factor
+    
+    #find the max key value
+    #
+    key_for_max = max(d.iteritems(), key=operator.itemgetter(1))[0]
+    diff = 1.0 - math.fsum(d.itervalues())
+    #print "discrepancy = " + str(diff)
+    d[key_for_max] += diff
+
+
+##
+  #function loltoDict.py
+  #takes input of list of lists
+  #prints out first element of each list 
+  #prints out histogram of the remaining words in the list in pretty format
+  #returns True
+##
+
+def loltoDict(lists):   
+    
+    #find number of columns
+    #
+    numCol = len(lists)
+   
+    #loop over the columns
+    #
+    for i in xrange(numCol):
+            
+        #first print out first item in col 
+        #prettyyyyy
+        #
+        print("---------------------------------------------------------")
+        print("---------------------------------------------------------")
+        print("---------------------------------------------------------")
+        print(lists[i][0])
+        
+        #remove column entry
+        #
+        lists[i].pop(0)
+
+        #find how many words are in a column
+        #
+        lenCol = len(lists[0])
+    
+        #declare empty dict
+        #
+        d = {}
+    
+        #loop over rows
+        #
+        for j in xrange(lenCol):
+            
+            #try to remove some user formating errors
+            #
+            key = lists[i][j].lstrip().rstrip().lower()
+            
+            #add to dictionary
+            #
+            if not d.has_key(key):
+                d[key] = 1.0
+            
+            else:
+                d[key] = 1.0 + d[key]
+        
+        #normalise dict
+        #
+        normalise_dict(d)
+         
+        #pretty print and sort
+        #
+        for k in sorted(d, key = d.get, reverse = True):
+            print("%s = %f" %(k, d[k]))
+
+    #return true
+    #
+    return True
+
+#main
+#
+def main(argv):
+
+    #get argc
+    #
+    argc = len(argv)
+    
+    #declare delimitor
+    #     
+    delim = "|"
+    
+    #loop over command line files
+    #
+    for z in range(1,argc):
+        
+        #grab file name
+        #
+        fname = argv[z]
+    
+        #grab text file contents into list of lists
+        #
+        listoflists = col2Lol(fname, delim)
+    
+        #convert list of lists into dictionary
+        #
+        loltoDict(listoflists)
+    
+
+#end gracefully
+#
+if __name__ == "__main__":
+    main(sys.argv[0:])

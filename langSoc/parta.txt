@@ -1,0 +1,17 @@
+parta1|parta2|parta3|parta4|parta5|parta6|parta7|parta8|parta9|parta10|parta11|parta12|parta13|parta14|parta15
+1. To miss class:|2. To waste time:|3. To study hard & with concentration at the last minute:|4. To try to gain favor with a professor:|5. A commercially-published subject outline or grade:|6. A difficult course:|7. An easy course:|8. A difficult examination:|9. To be treated unfairly on an examination:|10. To do poorly on an examination:|11. To do well on an examination:|12. To guess material to be covered on an examination:|13. Two examinations in a row:|14. An unannounced test:|15. Overall academic average:
+skip|fuck around|cram|earn brownie points||intensive|piece of cake|impossible| fucked|fucked|killed|N/A|double-whamy|pop-quiz|GPA
+skip|fuck around|cram|suck up||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+cut|bullshit|cram|suck up||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+cut|fuck around|cram|suck up||intense|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+hookie|bullshit|cram|suck up||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+skip|fuck around|cram|suck up||intense|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+cut|fuck around|cram|kiss ass||hard core|cake|bitch|fucked|fucked|killed it|N/A|double-whamy|pop-quiz|GPA
+skip|vegetate|cram|kiss ass||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+skip|fuck around|cram|kiss ass||hard core|piece of cake|tough|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+skip|fuck around|cram|kiss ass||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+cut|fuck around|cram|earn brownie points||hard core|cake|bitch|fucked|fucked|kill|N/A|double-whamy|pop-quiz|GPA
+cut|fuck around|cram|kiss ass||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+skip|dick around|cram|earm brownie points||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+skip|fuck around|cram|kiss ass||hard core|piece of cake|tough|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
+skip|fuck around|cram|kiss ass||hard core|piece of cake|bitch|fucked|fucked|aced|N/A|double-whamy|pop-quiz|GPA
